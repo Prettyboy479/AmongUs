@@ -10,8 +10,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //connects the view to a component
         view = GetComponent<PhotonView>();
+        if (view.IsMine)
+        {
+            Begin();
+        }
+        //connects the view to a component
     }
 
     // Update is called once per frame
@@ -21,6 +25,28 @@ public class Player : MonoBehaviour
         if (view.IsMine)
         {
             //insert controls etc here
+            Play();
         }
+    }
+    private void FixedUpdate()
+    {
+        //checks if the player is controlled by the local user
+        if (view.IsMine)
+        {
+            //insert controls etc here
+            FixedPlay();
+        }
+    }
+    public virtual void Play()
+    {
+
+    }
+    public virtual void FixedPlay()
+    {
+
+    }
+    public virtual void Begin()
+    {
+
     }
 }

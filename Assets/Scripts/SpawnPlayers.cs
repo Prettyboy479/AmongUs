@@ -6,6 +6,7 @@ public class SpawnPlayers : MonoBehaviour
 {
     //set playerprefab
     public GameObject playerPrefab;
+    public GameObject cameraPrefab;
     //this four set the bounds in terms of where the player can spawn
     public float minX;
     public float maxX;
@@ -17,7 +18,8 @@ public class SpawnPlayers : MonoBehaviour
         //gets a random point within the bounds set
         Vector2 randomPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
         //spawns a player character at the random position
-        PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+        //PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+        PhotonNetwork.Instantiate(cameraPrefab.name, randomPosition, Quaternion.identity);
 
     }
 
