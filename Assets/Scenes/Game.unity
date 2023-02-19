@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4686777784535054178, guid: 379a080c68d8f8c4d8800b27f5eefe29, type: 3}
-  cameraPrefab: {fileID: 809288431216372167, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
+  cameraPrefab: {fileID: 2672789130550066748, guid: 01f73966d98e32f4d8617817d4e05dbb, type: 3}
   minX: 0
   maxX: 10
   maxY: 10
