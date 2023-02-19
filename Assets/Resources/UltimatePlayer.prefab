@@ -40,6 +40,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3976913840410598802}
     m_Modifications:
+    - target: {fileID: 803042466044548441, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 809288431216372167, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
       propertyPath: m_Name
       value: CameraHolder
@@ -96,6 +100,22 @@ PrefabInstance:
       propertyPath: cameraPosition
       value: 
       objectReference: {fileID: 3751569908284535543}
+    - target: {fileID: 4776316062846719442, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776316062846719442, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776316062846719442, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776316062846719453, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb28d507743917247bd0e2fcefe8e1ab, type: 3}
 --- !u!4 &6702192228343469040 stripped
@@ -159,7 +179,7 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8333680047098038744, guid: 379a080c68d8f8c4d8800b27f5eefe29, type: 3}
-      propertyPath: m_LocalPosition.y
+      propertyPath: m_LocalPosition.x
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

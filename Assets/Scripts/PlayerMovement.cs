@@ -39,6 +39,7 @@ public class PlayerMovement : Player
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         MyInput();
+        SpeedControl();
         if (grounded)
         {
             rb.drag = groundDrag;
@@ -60,6 +61,11 @@ public class PlayerMovement : Player
     }
     private void SpeedControl()
     {
-
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
     }
 }

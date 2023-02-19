@@ -5,7 +5,7 @@ using Photon.Pun;
 public class SpawnPlayers : MonoBehaviour
 {
     //set playerprefab
-    public GameObject playerPrefab;
+    //public GameObject playerPrefab;
     public GameObject cameraPrefab;
     //this four set the bounds in terms of where the player can spawn
     public float minX;
