@@ -11,22 +11,27 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public InputField createInput;
     //access the input you put in to join room
     public InputField joinInput;
-    
+    public GameObject play;
+    public Transform avatar;
+    public GameObject player;
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public Text roomname;
     public RoomItem roomItemPrefab;
-    List<RoomItem> roomItemsList = new List<RoomItem>();
+    public List<RoomItem> roomItemsList = new List<RoomItem>();
+    public List<PlayerAvatar> playerList = new List<PlayerAvatar>(12);
+    public List<GameObject> playerGameList = new List<GameObject>(12);
     public Transform contentObject;
     public float timeBetweenUpdate = 1.5f;
     float nextUpdateTime;
+    //public playerItem player;
 
     public void CreateRoom()
     {
         if (createInput.text.Length >= 1)
         {
-        PhotonNetwork.CreateRoom(createInput.text, new RoomOptions() { MaxPlayers = 4 });
-
+        PhotonNetwork.CreateRoom(createInput.text, new RoomOptions() { MaxPlayers = 12 });
+            //playerList.Count = 12;
         }
         //creates a room with the createinput text attached
     }
@@ -56,6 +61,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         roomPanel.SetActive(false);
         lobbyPanel.SetActive(true);
+        Removeplayers(player);
 
     }
     void UpdateRoomList(List<RoomInfo> list)
@@ -77,13 +83,58 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinLobby();
     }
+    public void ReadyUp()
+    {
+
+        //load a multiplayer level
+        PhotonNetwork.LoadLevel("Game");
+    }
     public override void OnJoinedRoom()
     {
+        
         lobbyPanel.SetActive(false); 
         roomPanel.SetActive(true);
         roomname.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
-        //load a multiplayer level
-        //PhotonNetwork.LoadLevel("Game");
+        //player = Instantiate(play);
+        Fillplayers(play);
+    }
+    public void Fillplayers(GameObject go)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].isNull == true)
+            {
+                avatar = playerGameList[i].GetComponent<transform>();
+                Debug.Log($"{go.transform.position}, {playerList[i].transform.position}");
+                player = Instantiate(go,
+                                     avatar.position,
+                                     Quaternion.identity,
+                                     avatar);
+                                     //playerList[i].transform);
+               
+                Debug.Log($"{go.transform.position}");
+                playerList[i].Fill();
+                //playerList[i].SetActive(false);
+                break;
+            }
+        }
+    }
+    public void Removeplayers(GameObject go)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].transform.position == go.transform.position)
+            {
+                //playerList[i].Unfill();
+                for (int j = i; j < playerList.Count; j++)
+                {
+                    playerList[j] = playerList[j + 1];
+                }
+                break;
+            }
+        }
+       playerList[playerList.Count].gameObject.SetActive(true);
+        Destroy(go);
     }
     // Start is called before the first frame update
     void Start()
