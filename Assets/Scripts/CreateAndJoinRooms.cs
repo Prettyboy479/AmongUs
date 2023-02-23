@@ -16,11 +16,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public GameObject player;
     public GameObject lobbyPanel;
     public GameObject roomPanel;
+    public Image image;
     public Text roomname;
     public RoomItem roomItemPrefab;
     public List<RoomItem> roomItemsList = new List<RoomItem>();
     public List<PlayerAvatar> playerList = new List<PlayerAvatar>(12);
     public List<GameObject> playerGameList = new List<GameObject>(12);
+    public List<Image> playerImageList = new List<Image>(12);
     public Transform contentObject;
     public float timeBetweenUpdate = 1.5f;
     float nextUpdateTime;
@@ -100,12 +102,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void Fillplayers(GameObject go)
     {
-        for (int i = 0; i < playerList.Count; i++)
+        for (int i = 0; i < playerGameList.Count; i++)
         {
             if (playerList[i].isNull == true)
             {
-                avatar = playerGameList[i].GetComponent<transform>();
-                Debug.Log($"{go.transform.position}, {playerList[i].transform.position}");
+                avatar = playerGameList[i].GetComponent<Transform>();
+                Debug.Log($"{go.transform.position}, {playerGameList[i].transform.position}");
                 player = Instantiate(go,
                                      avatar.position,
                                      Quaternion.identity,
@@ -114,6 +116,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                
                 Debug.Log($"{go.transform.position}");
                 playerList[i].Fill();
+                image = playerImageList[i].GetComponent<Image>();
+                image.color = (new Color (255,255,255,0 ));
                 //playerList[i].SetActive(false);
                 break;
             }
@@ -121,19 +125,19 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void Removeplayers(GameObject go)
     {
-        for (int i = 0; i < playerList.Count; i++)
+        for (int i = 0; i < playerGameList.Count; i++)
         {
-            if (playerList[i].transform.position == go.transform.position)
+            if (playerGameList[i].transform.position == go.transform.position)
             {
                 //playerList[i].Unfill();
-                for (int j = i; j < playerList.Count; j++)
+                for (int j = i; j < playerGameList.Count - 1; j++)
                 {
                     playerList[j] = playerList[j + 1];
                 }
                 break;
             }
         }
-       playerList[playerList.Count].gameObject.SetActive(true);
+       playerList[playerList.Count].UnFill();
         Destroy(go);
     }
     // Start is called before the first frame update
